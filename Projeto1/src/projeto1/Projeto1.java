@@ -12,8 +12,11 @@ package projeto1;
 public class Projeto1 {
 
     /**
-     * @param args the command line arguments
      */
+    public enum Command {
+        CRIAR, INSPECIONAR, JOGAR, SAIR;
+    }
+    
     public static void main(String[] args) {
         System.out.println("Parte 1");
     }
