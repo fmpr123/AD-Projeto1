@@ -18,24 +18,55 @@ public class Game {
     private Army player;
     private Army enemy;
 
-    private void inspect() {
-        System.out.println(player.toString());
-    }
-
     public void create() {
-        int armySize;
+        int armySize = 100;
         Scanner scanner = new Scanner(System.in);
+        int catapultChoice, infantryChoice, cavalryChoice, splitChoice;
+
+        System.out.println("You have " + armySize + " slots available.");
         System.out.println("Choose ammount of Catapult: ");
-        int catapultChoice = scanner.nextInt();
+        catapultChoice = scanner.nextInt();
+        armySize -= catapultChoice;
+        System.out.println("You have " + armySize + " slots available.");
         System.out.println("Choose ammount of Infantry: ");
-        int infantryChoice = scanner.nextInt();
+        infantryChoice = scanner.nextInt();
+        armySize -= infantryChoice;
+        System.out.println("You have " + armySize + " slots available.");
         System.out.println("Choose ammount of Cavalry: ");
-        int cavalryChoice = scanner.nextInt();
+        cavalryChoice = scanner.nextInt();
+        armySize -= cavalryChoice;
+
         System.out.println("How do you want to split your army: (%)");
-        int splitChoice = scanner.nextInt();
+        splitChoice = scanner.nextInt();
         player = new Army(catapultChoice, infantryChoice, cavalryChoice, splitChoice);
     }
-    
+
+    private void inspect() {
+        System.out.println("Attack Force: ");
+        System.out.println(player.attackForce.toString());
+        System.out.println("Defense Force: ");
+        System.out.println(player.defenseForce.toString());
+    }
+
+    private void play() {
+        int attackPowerTotal = 0, defensePowerTotal = 0;
+        System.out.println("You are about to attack!");
+        System.out.println("Your attack force is: ");
+
+        for (int i = 0; i < player.attackPower.size(); i++) {
+            attackPowerTotal = attackPowerTotal + player.attackPower.get(i);
+        }
+        
+        System.out.println(attackPowerTotal);
+        System.out.println("Your defense power is: ");
+
+        for (int i = 0; i < player.defensePower.size(); i++) {
+            defensePowerTotal = defensePowerTotal + player.defensePower.get(i);
+        }
+
+        System.out.println(defensePowerTotal);
+    }
+
     public enum Command {
         CREATE, INSPECT, PLAY, EXIT;
     }
@@ -45,6 +76,7 @@ public class Game {
         System.out.println("Army Game");
         Scanner scanner = new Scanner(System.in);
         Command choice = Command.CREATE;
+
         do {
             System.out.println("Choose an option: Create, Inspect, Play, Exit");
 
@@ -62,6 +94,7 @@ public class Game {
                     break;
                 case PLAY:
                     System.out.println("play");
+                    game.play();
                     break;
                 case EXIT:
                     System.out.println("exit");

@@ -17,6 +17,6 @@ public class Cavalry extends FightingForce{
 
     @Override
     public String toString() {
-        return super.toString(); //To change body of generated methods, choose Tools | Templates.
+        return "Cavalry - Attack: " + getAttack()+" Defense: "+getDefense();
     }
 }
