@@ -46,7 +46,4 @@ public class FightingForce {
     public void setLuck(int luck) {
         this.luck = luck;
     }
-    
-    
-   
 }

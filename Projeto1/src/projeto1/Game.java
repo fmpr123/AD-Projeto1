@@ -20,22 +20,50 @@ public class Game {
 
     public void create() {
         int armySize = 100;
+        String slotsChoice = "";
         Scanner scanner = new Scanner(System.in);
-        int catapultChoice, infantryChoice, cavalryChoice, splitChoice;
+        int catapultChoice = 0, infantryChoice = 0, cavalryChoice = 0, splitChoice = 0;
 
-        System.out.println("You have " + armySize + " slots available.");
-        System.out.println("Choose ammount of Catapult: ");
-        catapultChoice = scanner.nextInt();
-        armySize -= catapultChoice;
-        System.out.println("You have " + armySize + " slots available.");
-        System.out.println("Choose ammount of Infantry: ");
-        infantryChoice = scanner.nextInt();
-        armySize -= infantryChoice;
-        System.out.println("You have " + armySize + " slots available.");
-        System.out.println("Choose ammount of Cavalry: ");
-        cavalryChoice = scanner.nextInt();
-        armySize -= cavalryChoice;
-
+        while (armySize > 0) {
+            if (armySize > 0) {
+                System.out.println("You have " + armySize + " slots available.");
+                System.out.println("Choose ammount of Catapult: ");
+                catapultChoice = scanner.nextInt();
+                while (catapultChoice > armySize) {
+                    System.out.println("You only have " + armySize + " slots available, choose another ammount: ");
+                    catapultChoice = scanner.nextInt();
+                }
+                armySize -= catapultChoice;
+            }
+            if (armySize > 0) {
+                System.out.println("You have " + armySize + " slots available.");
+                System.out.println("Choose ammount of Infantry: ");
+                infantryChoice = scanner.nextInt();
+                while (infantryChoice > armySize) {
+                    System.out.println("You only have " + armySize + " slots available, choose another ammount: ");
+                    infantryChoice = scanner.nextInt();
+                }
+                armySize -= infantryChoice;
+            }
+            if (armySize > 0) {
+                System.out.println("You have " + armySize + " slots available.");
+                System.out.println("Choose ammount of Cavalry: ");
+                cavalryChoice = scanner.nextInt();
+                while (cavalryChoice > armySize) {
+                    System.out.println("You only have " + armySize + " slots available, choose another ammount: ");
+                    cavalryChoice = scanner.nextInt();
+                }
+                armySize -= cavalryChoice;
+            }
+            if (armySize > 0) {
+                System.out.println("You still have " + armySize + " slots available. Do you wish to USE or LEAVE them?");
+                slotsChoice = scanner.next();
+                if (slotsChoice.contains("LEAVE") || slotsChoice.contains("leave")) {
+                    break;
+                }
+            }
+        }
+        
         System.out.println("How do you want to split your army: (%)");
         splitChoice = scanner.nextInt();
         player = new Army(catapultChoice, infantryChoice, cavalryChoice, splitChoice);
@@ -56,7 +84,7 @@ public class Game {
         for (int i = 0; i < player.attackPower.size(); i++) {
             attackPowerTotal = attackPowerTotal + player.attackPower.get(i);
         }
-        
+
         System.out.println(attackPowerTotal);
         System.out.println("Your defense power is: ");
 
@@ -79,7 +107,6 @@ public class Game {
 
         do {
             System.out.println("Choose an option: Create, Inspect, Play, Exit");
-
             String line = scanner.nextLine();
             choice = Command.valueOf(line);
 
