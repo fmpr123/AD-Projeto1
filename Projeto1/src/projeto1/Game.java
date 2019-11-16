@@ -25,7 +25,7 @@ public class Game {
         int armySize = 100, enemyArmySize = 100;
         int cycleControl = 0;
         int enemySum = 0;
-        String slotsChoice = "";
+        String slotsChoice = null;
         Scanner scanner = new Scanner(System.in);
         int catapultChoice = 0, infantryChoice = 0, cavalryChoice = 0, splitChoice = 0;
         int enemyCatapultChoice = 0, enemyInfantryChoice = 0, enemyCavalryChoice = 0, enemySplitChoice = 0;
@@ -62,56 +62,138 @@ public class Game {
             if (armySize > 0) {
                 System.out.println("You have " + armySize + " slots available.");
                 System.out.println("Choose ammount of Catapult: ");
-                
-                
-                
-                try{
-                    catapultChoice = scanner.nextInt();
-                }catch(Exception e){
-                    scanner.nextLine();
-                    System.out.println("Wrong input, please insert an Int: ");
-                    catapultChoice = scanner.nextInt();
+
+                while (true) {
+                    try {
+                        catapultChoice = scanner.nextInt();
+                        break;
+                    } catch (Exception e) {
+                        scanner.nextLine();
+                        System.out.println("Wrong input, please insert a number: ");
+                        continue;
+                    }
                 }
-                
-                
-                
+
                 while (catapultChoice > armySize) {
                     System.out.println("You only have " + armySize + " slots available, choose another ammount: ");
-                    catapultChoice = scanner.nextInt();
+                    while (true) {
+                        try {
+                            catapultChoice = scanner.nextInt();
+                            break;
+                        } catch (Exception e) {
+                            scanner.nextLine();
+                            System.out.println("Wrong input, please insert a number: ");
+                            continue;
+                        }
+                    }
                 }
                 armySize -= catapultChoice;
             }
             if (armySize > 0) {
                 System.out.println("You have " + armySize + " slots available.");
                 System.out.println("Choose ammount of Infantry: ");
-                infantryChoice = scanner.nextInt();
+
+                while (true) {
+                    try {
+                        infantryChoice = scanner.nextInt();
+                        break;
+                    } catch (Exception e) {
+                        scanner.nextLine();
+                        System.out.println("Wrong input, please insert a number: ");
+                        continue;
+                    }
+                }
+
                 while (infantryChoice > armySize) {
                     System.out.println("You only have " + armySize + " slots available, choose another ammount: ");
-                    infantryChoice = scanner.nextInt();
+                    while (true) {
+                        try {
+                            infantryChoice = scanner.nextInt();
+                            break;
+                        } catch (Exception e) {
+                            scanner.nextLine();
+                            System.out.println("Wrong input, please insert a number: ");
+                            continue;
+                        }
+                    }
+
                 }
                 armySize -= infantryChoice;
             }
             if (armySize > 0) {
                 System.out.println("You have " + armySize + " slots available.");
                 System.out.println("Choose ammount of Cavalry: ");
-                cavalryChoice = scanner.nextInt();
+
+                while (true) {
+                    try {
+                        cavalryChoice = scanner.nextInt();
+                        break;
+                    } catch (Exception e) {
+                        scanner.nextLine();
+                        System.out.println("Wrong ammount, please insert a number: ");
+                        continue;
+                    }
+                }
+
                 while (cavalryChoice > armySize) {
                     System.out.println("You only have " + armySize + " slots available, choose another ammount: ");
-                    cavalryChoice = scanner.nextInt();
+
+                    while (true) {
+                        try {
+                            cavalryChoice = scanner.nextInt();
+                            break;
+                        } catch (Exception e) {
+                            scanner.nextLine();
+                            System.out.println("Wrong input, please insert a number: ");
+                            continue;
+                        }
+                    }
+
                 }
                 armySize -= cavalryChoice;
             }
+
             if (armySize > 0) {
                 System.out.println("You still have " + armySize + " slots available. Do you wish to USE or LEAVE them?");
                 slotsChoice = scanner.next();
-                if (slotsChoice.contains("LEAVE") || slotsChoice.contains("leave")) {
+
+                while (slotsChoice.contentEquals("LEAVE") == false && slotsChoice.contentEquals("leave") == false
+                        && slotsChoice.contentEquals("use") == false && slotsChoice.contentEquals("USE") == false) {
+                    System.out.println("Wrong choice, do you wish to USE or LEAVE them?");
+                    slotsChoice = scanner.next();
+                }
+                if (slotsChoice.contentEquals("LEAVE") || slotsChoice.contentEquals("leave")) {
                     break;
                 }
             }
         }
 
         System.out.println("How do you want to split your army: (%)");
-        splitChoice = scanner.nextInt();
+        while (true) {
+            try {
+                splitChoice = scanner.nextInt();
+                break;
+            } catch (Exception e) {
+                scanner.nextLine();
+                System.out.println("Wrong input, please insert a number: ");
+                continue;
+            }
+        }
+
+        while (splitChoice < 1 || splitChoice > 100) {
+            System.out.println("Wrong ammount, please insert a number between 1 and 100: ");
+
+            while (true) {
+                try {
+                    splitChoice = scanner.nextInt();
+                    break;
+                } catch (Exception e) {
+                    scanner.nextLine();
+                    System.out.println("Wrong input, please insert a number: ");
+                    continue;
+                }
+            }
+        }
         player = new Army(catapultChoice, infantryChoice, cavalryChoice, splitChoice);
     }
 
@@ -131,22 +213,26 @@ public class Game {
     }
 
     private void play() {
-        int attackPowerTotal = 0, defensePowerTotal = 0;
+        int attackPowerTotal = 0, defensePowerTotal = 0, luck = 0;
         System.out.println("You are about to attack!");
-        System.out.println("Your attack force is: ");
 
         for (int i = 0; i < player.attackPower.size(); i++) {
-            attackPowerTotal = attackPowerTotal + player.attackPower.get(i);
+            luck = new Random().nextInt(2);
+            if (luck == 1) {
+                attackPowerTotal = attackPowerTotal + player.attackPower.get(i);
+            }
         }
 
-        System.out.println(attackPowerTotal);
-        System.out.println("Your defense power is: ");
+        System.out.println("Your attack force is: " + attackPowerTotal);
 
         for (int i = 0; i < player.defensePower.size(); i++) {
-            defensePowerTotal = defensePowerTotal + player.defensePower.get(i);
+            luck = new Random().nextInt(2);
+            if (luck == 1) {
+                defensePowerTotal = defensePowerTotal + player.defensePower.get(i);
+            }
         }
 
-        System.out.println(defensePowerTotal);
+        System.out.println("Your defense power is: " + defensePowerTotal);
     }
 
     public enum Command {
@@ -155,33 +241,50 @@ public class Game {
 
     public static void main(String[] args) {
         Game game = new Game();
-        System.out.println("Army Game");
         Scanner scanner = new Scanner(System.in);
         Command choice = Command.CREATE;
+        String line = null;
+        boolean verification = false;
+        System.out.println("Army Game");
 
         do {
             System.out.println("Choose an option: Create, Inspect, Play, Exit");
-            String line = scanner.nextLine();
-            choice = Command.valueOf(line);
 
+            line = scanner.next();
+            line = line.toUpperCase();
+
+            while (line.contentEquals("CREATE") == false && line.contentEquals("INSPECT") == false
+                    && line.contentEquals("PLAY") == false && line.contentEquals("EXIT") == false) {
+                scanner.nextLine();
+                System.out.println("Wrong choice, do you want to Create, Inspect, Play or Exit");
+
+                line = scanner.nextLine();
+                line = line.toUpperCase();
+            }
+
+            if (line.contentEquals("INSPECT") == true && verification == false
+                    || line.contentEquals("PLAY") == true && verification == false) {
+                System.out.println("You haven't created any army yet, let's CREATE an army first.");
+                line = "CREATE";
+            }
+
+            choice = Command.valueOf(line);
             switch (choice) {
                 case CREATE:
-                    System.out.println("create");
+                    verification = true;
+                    System.out.println("CREATE");
                     game.create();
                     break;
                 case INSPECT:
-                    System.out.println("inspect");
+                    System.out.println("INSPECT");
                     game.inspect();
                     break;
                 case PLAY:
-                    System.out.println("play");
+                    System.out.println("PLAY");
                     game.play();
                     break;
                 case EXIT:
-                    System.out.println("exit");
-                    break;
-                default:
-                    System.out.println("Invalid option");
+                    System.out.println("EXIT");
                     break;
             }
         } while (choice != Command.EXIT);
