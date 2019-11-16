@@ -148,7 +148,6 @@ public class Game {
                             continue;
                         }
                     }
-
                 }
                 armySize -= cavalryChoice;
             }
@@ -199,8 +198,8 @@ public class Game {
 
     private void inspect() {
         System.out.println("Player Attack Force: ");
-        Collections.sort(player.attackForce);
-        System.out.println("START HERE: " + player.toString() + " END.");
+        //Collections.sort(player.attackForce);
+        System.out.println(player.attackForce.toString());
         System.out.println("Player Defense Force: ");
         System.out.println(player.defenseForce.toString());
         
@@ -233,6 +232,12 @@ public class Game {
         }
 
         System.out.println("Your defense power is: " + defensePowerTotal);
+        
+        
+        //System.out.println(player.attackForce.get(0));
+        
+        
+        
     }
 
     public enum Command {

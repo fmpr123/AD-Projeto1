@@ -13,45 +13,54 @@ import java.util.Random;
  *
  * @author Turma A
  */
-public class Army implements Comparable<FightingForce>{
-  ArrayList<FightingForce> attackForce;
-  ArrayList<FightingForce> defenseForce;
+public class Army implements Comparable<FightingForce> {
+    ArrayList<FightingForce> attackForce;
+    ArrayList<FightingForce> defenseForce;
+    
+    ArrayList<Integer> attackPower = new ArrayList<>();
+    ArrayList<Integer> defensePower = new ArrayList<>();
     
     public Army() {
         attackForce = new ArrayList<>();
         defenseForce = new ArrayList<>();
     }
 
-    public Army(int catapult, int infantry, int cavalry,int side) {
+    public Army(int catapult, int infantry, int cavalry, int side) {
         attackForce = new ArrayList<>();
         defenseForce = new ArrayList<>();
-        
+
         for (int i = 0; i < catapult; i++) {
-            if(new Random().nextInt(101)<side){
+            if (new Random().nextInt(101) < side) {
                 attackForce.add(new Catapult());
-            }else{
+                attackPower.add(70);
+            } else {
                 defenseForce.add(new Catapult());
+                defensePower.add(1);
             }
         }
         for (int i = 0; i < infantry; i++) {
-            if(new Random().nextInt(101)<side){
+            if (new Random().nextInt(101) < side) {
                 attackForce.add(new Infantry());
-            }else{
+                attackPower.add(25);
+            } else {
                 defenseForce.add(new Infantry());
+                defensePower.add(75);
             }
         }
         for (int i = 0; i < cavalry; i++) {
-            if(new Random().nextInt(101)<side){
+            if (new Random().nextInt(101) < side) {
                 attackForce.add(new Cavalry());
-            }else{
+                attackPower.add(50);
+            } else {
                 defenseForce.add(new Cavalry());
+                defensePower.add(50);
             }
         }
     }
 
     @Override
     public String toString() {
-        return attackForce.get(0).toString();
+        return attackForce.toString();
     }
 
     @Override
