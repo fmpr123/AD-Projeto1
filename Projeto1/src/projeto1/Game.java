@@ -7,6 +7,7 @@ package projeto1;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -28,7 +29,19 @@ public class Game {
             if (armySize > 0) {
                 System.out.println("You have " + armySize + " slots available.");
                 System.out.println("Choose ammount of Catapult: ");
-                catapultChoice = scanner.nextInt();
+                
+                
+                
+                try{
+                    catapultChoice = scanner.nextInt();
+                }catch(Exception e){
+                    scanner.nextLine();
+                    System.out.println("Wrong input, please insert an Int: ");
+                    catapultChoice = scanner.nextInt();
+                }
+                
+                
+                
                 while (catapultChoice > armySize) {
                     System.out.println("You only have " + armySize + " slots available, choose another ammount: ");
                     catapultChoice = scanner.nextInt();
@@ -63,7 +76,7 @@ public class Game {
                 }
             }
         }
-        
+
         System.out.println("How do you want to split your army: (%)");
         splitChoice = scanner.nextInt();
         player = new Army(catapultChoice, infantryChoice, cavalryChoice, splitChoice);
