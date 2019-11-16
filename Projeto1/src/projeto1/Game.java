@@ -8,6 +8,7 @@ package projeto1;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.InputMismatchException;
+import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -162,7 +163,6 @@ public class Game {
             }
         }
         player = new Army(catapultChoice, infantryChoice, cavalryChoice, splitChoice);
-
     }
 
     private void inspect() {
@@ -173,22 +173,26 @@ public class Game {
     }
 
     private void play() {
-        int attackPowerTotal = 0, defensePowerTotal = 0;
+        int attackPowerTotal = 0, defensePowerTotal = 0, luck = 0;
         System.out.println("You are about to attack!");
-        System.out.println("Your attack force is: ");
 
         for (int i = 0; i < player.attackPower.size(); i++) {
-            attackPowerTotal = attackPowerTotal + player.attackPower.get(i);
+            luck = new Random().nextInt(2);
+            if (luck == 1) {
+                attackPowerTotal = attackPowerTotal + player.attackPower.get(i);
+            }
         }
 
-        System.out.println(attackPowerTotal);
-        System.out.println("Your defense power is: ");
+        System.out.println("Your attack force is: " + attackPowerTotal);
 
         for (int i = 0; i < player.defensePower.size(); i++) {
-            defensePowerTotal = defensePowerTotal + player.defensePower.get(i);
+            luck = new Random().nextInt(2);
+            if (luck == 1) {
+                defensePowerTotal = defensePowerTotal + player.defensePower.get(i);
+            }
         }
 
-        System.out.println(defensePowerTotal);
+        System.out.println("Your defense power is: " + defensePowerTotal);
     }
 
     public enum Command {
@@ -200,26 +204,34 @@ public class Game {
         Scanner scanner = new Scanner(System.in);
         Command choice = Command.CREATE;
         String line = null;
+        boolean verification = false;
         System.out.println("Army Game");
-        
+
         do {
             System.out.println("Choose an option: Create, Inspect, Play, Exit");
-            
+
             line = scanner.next();
             line = line.toUpperCase();
-            
+
             while (line.contentEquals("CREATE") == false && line.contentEquals("INSPECT") == false
                     && line.contentEquals("PLAY") == false && line.contentEquals("EXIT") == false) {
                 scanner.nextLine();
                 System.out.println("Wrong choice, do you want to Create, Inspect, Play or Exit");
-                
+
                 line = scanner.nextLine();
                 line = line.toUpperCase();
             }
-            
+
+            if (line.contentEquals("INSPECT") == true && verification == false
+                    || line.contentEquals("PLAY") == true && verification == false) {
+                System.out.println("You haven't created any army yet, let's CREATE an army first.");
+                line = "CREATE";
+            }
+
             choice = Command.valueOf(line);
             switch (choice) {
                 case CREATE:
+                    verification = true;
                     System.out.println("CREATE");
                     game.create();
                     break;
