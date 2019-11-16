@@ -17,7 +17,7 @@ public class Catapult extends FightingForce {
     
     @Override
     public String toString() {
-        return "Catapult - Attack: " + getAttack()+" Defense: "+getDefense(); //To change body of generated methods, choose Tools | Templates.
+        return "Catapult - Attack: " + getAttack() + " Defense: "+getDefense(); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

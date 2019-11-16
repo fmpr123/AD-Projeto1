@@ -6,8 +6,10 @@
 package projeto1;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.InputMismatchException;
+import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -20,10 +22,41 @@ public class Game {
     private Army enemy;
 
     public void create() {
-        int armySize = 100;
+        int armySize = 100, enemyArmySize = 100;
+        int cycleControl = 0;
+        int enemySum = 0;
         String slotsChoice = "";
         Scanner scanner = new Scanner(System.in);
         int catapultChoice = 0, infantryChoice = 0, cavalryChoice = 0, splitChoice = 0;
+        int enemyCatapultChoice = 0, enemyInfantryChoice = 0, enemyCavalryChoice = 0, enemySplitChoice = 0;
+        
+        //CPU Army
+        while (enemyArmySize > 0 && cycleControl == 0) {
+            enemyCatapultChoice = new Random().nextInt(101);
+            enemyArmySize -= enemyCatapultChoice;
+            //System.out.println("catapultas: " + enemyCatapultChoice);
+            System.out.println(enemyArmySize);
+
+            enemyInfantryChoice = new Random().nextInt(enemyArmySize);
+            enemyArmySize -= enemyInfantryChoice;
+            //System.out.println("infantaria: " + enemyInfantryChoice);
+            System.out.println(enemyArmySize);
+
+            enemyCavalryChoice = new Random().nextInt(enemyArmySize);
+            enemyArmySize -= enemyCavalryChoice;
+            //System.out.println("cavalaria: " + enemyCavalryChoice);
+            System.out.println(enemyArmySize);
+            
+            enemySplitChoice = new Random().nextInt(101);
+            
+            enemy = new Army(enemyCatapultChoice, enemyInfantryChoice, enemyCavalryChoice, enemySplitChoice);
+            
+            cycleControl = 1;
+            //enemySum = enemyCatapultChoice + enemyInfantryChoice + enemyCavalryChoice;
+            //System.out.println("soma exercito inimigo = " + enemySum);
+            //System.out.println("split exercito inimigo = " + enemySplitChoice);  
+        }
+        
 
         while (armySize > 0) {
             if (armySize > 0) {
@@ -83,10 +116,18 @@ public class Game {
     }
 
     private void inspect() {
-        System.out.println("Attack Force: ");
-        System.out.println(player.attackForce.toString());
-        System.out.println("Defense Force: ");
+        System.out.println("Player Attack Force: ");
+        Collections.sort(player.attackForce);
+        System.out.println("START HERE: " + player.toString() + " END.");
+        System.out.println("Player Defense Force: ");
         System.out.println(player.defenseForce.toString());
+        
+        //CPU Inspect
+        System.out.println("Enemy Attack Force: ");
+        System.out.println(enemy.attackForce.toString());
+        Collections.sort(enemy.attackPower);
+        System.out.println("Enemy Defense Force: ");
+        System.out.println(enemy.defenseForce.toString());
     }
 
     private void play() {
