@@ -232,12 +232,6 @@ public class Game {
         }
 
         System.out.println("Your defense power is: " + defensePowerTotal);
-        
-        
-        //System.out.println(player.attackForce.get(0));
-        
-        
-        
     }
 
     public enum Command {
