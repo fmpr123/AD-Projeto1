@@ -16,7 +16,7 @@ public class FightingForce {
 
     public FightingForce() {
     }
-
+    
     public FightingForce(int attack, int defense, int luck) {
         this.attack = attack;
         this.defense = defense;
@@ -30,20 +30,20 @@ public class FightingForce {
     public void setDefense(int defense) {
         this.defense = defense;
     }
+    
+    public void setLuck(int luck) {
+        this.luck = luck;
+    }
 
     public int getAttack() {
         return attack;
     }
-
-    public int getLuck() {
-        return luck;
-    }
-
+    
     public int getDefense() {
         return defense;
     }
 
-    public void setLuck(int luck) {
-        this.luck = luck;
+    public int getLuck() {
+        return luck;
     }
 }

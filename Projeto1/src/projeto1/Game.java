@@ -221,7 +221,7 @@ public class Game {
                 attackPowerTotal = attackPowerTotal + player.attackPower.get(i);
             }
         }
-
+        
         System.out.println("Your attack force is: " + attackPowerTotal);
 
         for (int i = 0; i < player.defensePower.size(); i++) {
@@ -244,6 +244,7 @@ public class Game {
         Command choice = Command.CREATE;
         String line = null;
         boolean verification = false;
+        
         System.out.println("Army Game");
 
         do {
