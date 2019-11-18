@@ -232,26 +232,6 @@ public class Game {
     }
 
     private void play() {
-        /*int attackPower = 0, defensePower = 0, luck = 0;
-        System.out.println("You are about to attack!");
-        
-        for (int i = 0; i < player.attackForce.size(); i++) {
-        luck = new Random().nextInt(2);
-        if (luck == 1) {
-        attackPower = attackPower + player.attackForce.get(i).getAttack();
-        }
-        }
-        
-        System.out.println("Your total attack force is: " + attackPower);
-        
-        for (int i = 0; i < player.defenseForce.size(); i++) {
-        luck = new Random().nextInt(2);
-        if (luck == 1) {
-        defensePower = defensePower + player.defenseForce.get(i).getAttack();
-        }
-        }
-        
-        System.out.println("Your total defense power is: " + defensePower);*/
         Collections.sort(player.defenseForce);
         Collections.sort(enemy.defenseForce);
         int playerAttack = Combat.attackSizeOf(player.attackForce);
