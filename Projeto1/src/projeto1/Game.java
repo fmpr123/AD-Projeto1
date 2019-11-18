@@ -29,7 +29,7 @@ public class Game {
         Scanner scanner = new Scanner(System.in);
         int catapultChoice = 0, infantryChoice = 0, cavalryChoice = 0, splitChoice = 0;
         int enemyCatapultChoice = 0, enemyInfantryChoice = 0, enemyCavalryChoice = 0, enemySplitChoice = 0;
-        
+
         //CPU Army
         while (enemyArmySize > 0 && cycleControl == 0) {
             enemyCatapultChoice = new Random().nextInt(101);
@@ -46,18 +46,18 @@ public class Game {
             enemyArmySize -= enemyCavalryChoice;
             //System.out.println("cavalaria: " + enemyCavalryChoice);
             System.out.println(enemyArmySize);
-            
+
             enemySplitChoice = new Random().nextInt(101);
-            
+
             enemy = new Army(enemyCatapultChoice, enemyInfantryChoice, enemyCavalryChoice, enemySplitChoice);
-            
+
             cycleControl = 1;
             //enemySum = enemyCatapultChoice + enemyInfantryChoice + enemyCavalryChoice;
             //System.out.println("soma exercito inimigo = " + enemySum);
             //System.out.println("split exercito inimigo = " + enemySplitChoice);  
         }
-        
 
+        //PLAYER
         while (armySize > 0) {
             if (armySize > 0) {
                 System.out.println("You have " + armySize + " slots available.");
@@ -227,7 +227,7 @@ public class Game {
                 attackPowerTotal = attackPowerTotal + player.attackPower.get(i);
             }
         }
-
+        
         System.out.println("Your attack force is: " + attackPowerTotal);
 
         for (int i = 0; i < player.defensePower.size(); i++) {
@@ -238,12 +238,6 @@ public class Game {
         }
 
         System.out.println("Your defense power is: " + defensePowerTotal);
-        
-        
-        //System.out.println(player.attackForce.get(0));
-        
-        
-        
     }
 
     public enum Command {
@@ -256,20 +250,25 @@ public class Game {
         Command choice = Command.CREATE;
         String line = null;
         boolean verification = false;
+        
         System.out.println("Army Game");
 
         do {
             System.out.println("Choose an option: Create, Inspect, Play, Exit");
 
             line = scanner.next();
+            line = line.replaceAll("[0-9]","");
             line = line.toUpperCase();
 
             while (line.contentEquals("CREATE") == false && line.contentEquals("INSPECT") == false
                     && line.contentEquals("PLAY") == false && line.contentEquals("EXIT") == false) {
+
                 scanner.nextLine();
+
                 System.out.println("Wrong choice, do you want to Create, Inspect, Play or Exit");
 
                 line = scanner.nextLine();
+                line = line.replaceAll("[0-9]","");
                 line = line.toUpperCase();
             }
 
