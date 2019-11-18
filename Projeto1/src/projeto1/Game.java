@@ -218,26 +218,26 @@ public class Game {
     }
 
     private void play() {
-        int attackPowerTotal = 0, defensePowerTotal = 0, luck = 0;
+        int attackPower = 0, defensePower = 0, luck = 0;
         System.out.println("You are about to attack!");
-
-        for (int i = 0; i < player.attackPower.size(); i++) {
+        
+        for (int i = 0; i < player.attackForce.size(); i++) {
             luck = new Random().nextInt(2);
             if (luck == 1) {
-                attackPowerTotal = attackPowerTotal + player.attackPower.get(i);
+                attackPower = attackPower + player.attackForce.get(i).getAttack();
             }
         }
         
-        System.out.println("Your attack force is: " + attackPowerTotal);
+        System.out.println("Your attack force is: " + attackPower);
 
-        for (int i = 0; i < player.defensePower.size(); i++) {
+        for (int i = 0; i < player.defenseForce.size(); i++) {
             luck = new Random().nextInt(2);
             if (luck == 1) {
-                defensePowerTotal = defensePowerTotal + player.defensePower.get(i);
+                defensePower = defensePower + player.defenseForce.get(i).getAttack();
             }
         }
 
-        System.out.println("Your defense power is: " + defensePowerTotal);
+        System.out.println("Your defense power is: " + defensePower);
     }
 
     public enum Command {
