@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 /**
  *
@@ -22,6 +23,7 @@ public class Game {
     private Army enemy;
 
     public void create() {
+
         int armySize = 100, enemyArmySize = 100;
         int cycleControl = 0;
         int enemySum = 0;
@@ -197,6 +199,8 @@ public class Game {
     }
 
     private void inspect() {
+        if (!player.attackForce.isEmpty()) {
+            
         System.out.println("Player Attack Force: ");
         System.out.println(player.attackForce.toString());
         Collections.sort(player.attackForce);
@@ -207,15 +211,12 @@ public class Game {
         System.out.println("START: " + player.attackForce + " : END");
         //int xd = ArmySize.defenseSizeOf(player.defenseForce);
         Collections.sort(player.defenseForce);
-        System.out.println("Army before test: " + ArmySize.defenseSizeOf(player.defenseForce) + " : END");
-        ArmySize.test(player.defenseForce);
-        System.out.println("Army after test: " + ArmySize.defenseSizeOf(player.defenseForce) + " : END");
-        
+        System.out.println("Army before test: " + Combat.defenseSizeOf(player.defenseForce) + " : END");
+        System.out.println("Army after test: " + Combat.defenseSizeOf(player.defenseForce) + " : END");
+
         player.attackForce.get(0).setLuck(1);
         System.out.println("Luck after: " + player.attackForce.get(0).getLuck() + " : END");
-        
-        
-        
+
         //CPU Inspect
         System.out.println("Enemy Attack Force: ");
         System.out.println(enemy.attackForce.toString());
@@ -224,6 +225,10 @@ public class Game {
         System.out.println(enemy.attackForce.toString());
         System.out.println("Enemy Defense Force: ");
         System.out.println(enemy.defenseForce.toString());
+        
+        }else{
+            System.out.println("Create your army");
+        }
     }
 
     private void play() {
@@ -249,36 +254,59 @@ public class Game {
         System.out.println("Your total defense power is: " + defensePower);*/
         Collections.sort(player.defenseForce);
         Collections.sort(enemy.defenseForce);
-        int playerAttack = ArmySize.attackSizeOf(player.attackForce);
-        int playerHealth = ArmySize.defenseSizeOf(player.defenseForce);
-        int enemyAttack = ArmySize.attackSizeOf(enemy.attackForce);
-        int enemyHealth = ArmySize.defenseSizeOf(enemy.defenseForce);
+        int playerAttack = Combat.attackSizeOf(player.attackForce);
+        int playerHealth = Combat.defenseSizeOf(player.defenseForce);
+        int enemyAttack = Combat.attackSizeOf(enemy.attackForce);
+        int enemyHealth = Combat.defenseSizeOf(enemy.defenseForce);
         int roundCounter = 1;
-        
+        Scanner scanner = new Scanner(System.in);
+        String line = null;
+        Game game = new Game();
+
         System.out.println("The game is about to begin!");
         System.out.println("You have a theoretical attack force of " + playerAttack + ", and a defensive force of " + playerHealth);
         System.out.println("You will be fighting an enemy that has a theoretical attack force of " + enemyAttack + ", and a defensive force of " + enemyHealth);
         System.out.println(" ");
-        
+
         while (playerHealth > 0 && enemyHealth > 0) {
-            int playerRoundForce = ArmySize.attackForceRound(player.attackForce);
-            int enemyRoundForce = ArmySize.attackForceRound(enemy.attackForce);
-            playerHealth = ArmySize.defenseSizeOf(player.defenseForce);
-            enemyHealth = ArmySize.defenseSizeOf(enemy.defenseForce);
-            
-            System.out.println("Round " + roundCounter + " is about to begin!");
-            System.out.println(" ");
-            System.out.println("You will be attacking with a force of " + playerRoundForce + " and your enemy has " + enemyHealth + " of defensive forces!");
-            ArmySize.attackStart(playerRoundForce, enemy.defenseForce);
-            System.out.println("The enemy retaliates with a force of " + enemyRoundForce + " and you're defending with " + playerHealth + " of defensive forces!");
-            ArmySize.attackStart(enemyRoundForce, player.defenseForce);
+            int playerRoundForce = Combat.attackForceRound(player.attackForce);
+            int enemyRoundForce = Combat.attackForceRound(enemy.attackForce);
+            playerHealth = Combat.defenseSizeOf(player.defenseForce);
+            enemyHealth = Combat.defenseSizeOf(enemy.defenseForce);
+
             if (enemyHealth <= 0) {
                 System.out.println("Congratulations! You have won!");
+                System.out.println("Do you wish to play again?");
+                line = scanner.next();
+                if (line.contentEquals("yes") == true) {
+                    break;
+                } else {
+
+                }
             } else if (playerHealth <= 0) {
                 System.out.println("Your enemy has bested you.");
+                line = scanner.next();
+                if (line.contentEquals("CREATE") == true) {
+                    game.create();
+                }
+                break;
             }
+
+            System.out.println("Round " + roundCounter + " begins!");
+            System.out.println("You will be attacking with a force of " + playerRoundForce + " and your enemy has " + enemyHealth + " of defensive forces!");
+            Combat.attackStart(playerRoundForce, enemy.defenseForce);
+            System.out.println("The enemy retaliates with a force of " + enemyRoundForce + " and you're defending with " + playerHealth + " of defensive forces!");
+            Combat.attackStart(enemyRoundForce, player.defenseForce);
+
             roundCounter++;
+            System.out.println(" ");
         }
+        
+            player.attackForce.clear();
+            player.defenseForce.clear();
+            enemy.attackForce.clear();
+            enemy.defenseForce.clear();
+
     }
 
     public enum Command {
@@ -291,14 +319,14 @@ public class Game {
         Command choice = Command.CREATE;
         String line = null;
         boolean verification = false;
-        
+
         System.out.println("Army Game");
 
         do {
             System.out.println("Choose an option: Create, Inspect, Play, Exit");
 
             line = scanner.next();
-            line = line.replaceAll("[0-9]","");
+            line = line.replaceAll("[0-9]", "");
             line = line.toUpperCase();
 
             while (line.contentEquals("CREATE") == false && line.contentEquals("INSPECT") == false
@@ -309,7 +337,7 @@ public class Game {
                 System.out.println("Wrong choice, do you want to Create, Inspect, Play or Exit");
 
                 line = scanner.nextLine();
-                line = line.replaceAll("[0-9]","");
+                line = line.replaceAll("[0-9]", "");
                 line = line.toUpperCase();
             }
 

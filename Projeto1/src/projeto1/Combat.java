@@ -9,7 +9,7 @@ import java.util.*;
  *
  * @author Pedro Malho
  */
-public class ArmySize {
+public class Combat {
      
     public static int defenseSizeOf(ArrayList<FightingForce> army) {
         int total = 0;
@@ -47,19 +47,15 @@ public class ArmySize {
     
     public static ArrayList attackStart(int attack, ArrayList<FightingForce> army) {
         int defenseValue = 0;
-        int i = 0;
         
-        while (attack < defenseValue) {
-            defenseValue += army.get(i).getDefense();
+        while (defenseValue < attack) {
+            if (army.size() == 0) {
+                break;
+            }
+            defenseValue += army.get(0).getDefense();
             army.remove(0);
-            i++;
         }
         
-        return army;
-    }
-    
-    public static ArrayList test(ArrayList<FightingForce> army) {
-        army.remove(0);
         return army;
     }
 }

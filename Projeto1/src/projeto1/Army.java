@@ -6,8 +6,6 @@
 package projeto1;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Objects;
 import java.util.Random;
 
 /**
