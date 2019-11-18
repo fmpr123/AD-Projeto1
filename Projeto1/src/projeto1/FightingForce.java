@@ -5,11 +5,13 @@
  */
 package projeto1;
 
+import java.util.Objects;
+
 /**
  *
  * @author Turma A
  */
-public class FightingForce {
+public class FightingForce implements Comparable<FightingForce>{
    private int attack;
    private int defense;
    private int luck;
@@ -46,4 +48,35 @@ public class FightingForce {
     public void setLuck(int luck) {
         this.luck = luck;
     }
+
+    @Override
+    public boolean equals(final Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        
+        final FightingForce other = (FightingForce) obj;
+        
+        return attack == other.attack && defense == other.defense;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(attack, defense);
+    }
+
+    @Override
+    public int compareTo(final FightingForce another) {
+        return getAttack() - another.getAttack();
+    }
+
+    @Override
+    public String toString() {
+        return "Attack: " + this.attack + " | Defense: " + this.defense;
+    }
+    
+    
 }

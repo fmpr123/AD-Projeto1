@@ -7,13 +7,14 @@ package projeto1;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Objects;
 import java.util.Random;
 
 /**
  *
  * @author Turma A
  */
-public class Army implements Comparable<FightingForce> {
+public class Army {
     ArrayList<FightingForce> attackForce;
     ArrayList<FightingForce> defenseForce;
     
@@ -56,15 +57,5 @@ public class Army implements Comparable<FightingForce> {
                 defensePower.add(50);
             }
         }
-    }
-
-    @Override
-    public String toString() {
-        return attackForce.toString();
-    }
-
-    @Override
-    public int compareTo(FightingForce o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

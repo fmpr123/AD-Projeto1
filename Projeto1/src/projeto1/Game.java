@@ -198,15 +198,21 @@ public class Game {
 
     private void inspect() {
         System.out.println("Player Attack Force: ");
-        //Collections.sort(player.attackForce);
+        System.out.println(player.attackForce.toString());
+        Collections.sort(player.attackForce);
+        System.out.println("Player Attack Force Sorted: ");
         System.out.println(player.attackForce.toString());
         System.out.println("Player Defense Force: ");
         System.out.println(player.defenseForce.toString());
+        System.out.println("START: " + player.attackForce + " : END");
+        System.out.println("START attack: " + player.attackForce.get(0).getAttack() + " : END");
         
         //CPU Inspect
         System.out.println("Enemy Attack Force: ");
         System.out.println(enemy.attackForce.toString());
-        Collections.sort(enemy.attackPower);
+        Collections.sort(enemy.attackForce);
+        System.out.println("Enemy Attack Force Sorted: ");
+        System.out.println(enemy.attackForce.toString());
         System.out.println("Enemy Defense Force: ");
         System.out.println(enemy.defenseForce.toString());
     }

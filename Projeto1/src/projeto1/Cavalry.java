@@ -17,6 +17,6 @@ public class Cavalry extends FightingForce{
 
     @Override
     public String toString() {
-        return "Cavalry - Attack: " + getAttack()+" Defense: "+getDefense();
+        return "Cavalry - " + super.toString();
     }
 }

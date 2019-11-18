@@ -17,7 +17,7 @@ public class Infantry extends FightingForce{
 
     @Override
     public String toString() {
-        return "Infantry - Attack: " + getAttack()+" Defense: "+getDefense();
+        return "Infantry - " + super.toString();
     }
     
 }
