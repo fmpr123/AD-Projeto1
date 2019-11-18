@@ -205,7 +205,16 @@ public class Game {
         System.out.println("Player Defense Force: ");
         System.out.println(player.defenseForce.toString());
         System.out.println("START: " + player.attackForce + " : END");
-        System.out.println("START attack: " + player.attackForce.get(0).getAttack() + " : END");
+        //int xd = ArmySize.defenseSizeOf(player.defenseForce);
+        Collections.sort(player.defenseForce);
+        System.out.println("Army before test: " + ArmySize.defenseSizeOf(player.defenseForce) + " : END");
+        ArmySize.test(player.defenseForce);
+        System.out.println("Army after test: " + ArmySize.defenseSizeOf(player.defenseForce) + " : END");
+        
+        player.attackForce.get(0).setLuck(1);
+        System.out.println("Luck after: " + player.attackForce.get(0).getLuck() + " : END");
+        
+        
         
         //CPU Inspect
         System.out.println("Enemy Attack Force: ");
@@ -218,26 +227,58 @@ public class Game {
     }
 
     private void play() {
-        int attackPower = 0, defensePower = 0, luck = 0;
+        /*int attackPower = 0, defensePower = 0, luck = 0;
         System.out.println("You are about to attack!");
         
         for (int i = 0; i < player.attackForce.size(); i++) {
-            luck = new Random().nextInt(2);
-            if (luck == 1) {
-                attackPower = attackPower + player.attackForce.get(i).getAttack();
-            }
+        luck = new Random().nextInt(2);
+        if (luck == 1) {
+        attackPower = attackPower + player.attackForce.get(i).getAttack();
+        }
         }
         
-        System.out.println("Your attack force is: " + attackPower);
-
+        System.out.println("Your total attack force is: " + attackPower);
+        
         for (int i = 0; i < player.defenseForce.size(); i++) {
-            luck = new Random().nextInt(2);
-            if (luck == 1) {
-                defensePower = defensePower + player.defenseForce.get(i).getAttack();
-            }
+        luck = new Random().nextInt(2);
+        if (luck == 1) {
+        defensePower = defensePower + player.defenseForce.get(i).getAttack();
         }
-
-        System.out.println("Your defense power is: " + defensePower);
+        }
+        
+        System.out.println("Your total defense power is: " + defensePower);*/
+        Collections.sort(player.defenseForce);
+        Collections.sort(enemy.defenseForce);
+        int playerAttack = ArmySize.attackSizeOf(player.attackForce);
+        int playerHealth = ArmySize.defenseSizeOf(player.defenseForce);
+        int enemyAttack = ArmySize.attackSizeOf(enemy.attackForce);
+        int enemyHealth = ArmySize.defenseSizeOf(enemy.defenseForce);
+        int roundCounter = 1;
+        
+        System.out.println("The game is about to begin!");
+        System.out.println("You have a theoretical attack force of " + playerAttack + ", and a defensive force of " + playerHealth);
+        System.out.println("You will be fighting an enemy that has a theoretical attack force of " + enemyAttack + ", and a defensive force of " + enemyHealth);
+        System.out.println(" ");
+        
+        while (playerHealth > 0 && enemyHealth > 0) {
+            int playerRoundForce = ArmySize.attackForceRound(player.attackForce);
+            int enemyRoundForce = ArmySize.attackForceRound(enemy.attackForce);
+            playerHealth = ArmySize.defenseSizeOf(player.defenseForce);
+            enemyHealth = ArmySize.defenseSizeOf(enemy.defenseForce);
+            
+            System.out.println("Round " + roundCounter + " is about to begin!");
+            System.out.println(" ");
+            System.out.println("You will be attacking with a force of " + playerRoundForce + " and your enemy has " + enemyHealth + " of defensive forces!");
+            ArmySize.attackStart(playerRoundForce, enemy.defenseForce);
+            System.out.println("The enemy retaliates with a force of " + enemyRoundForce + " and you're defending with " + playerHealth + " of defensive forces!");
+            ArmySize.attackStart(enemyRoundForce, player.defenseForce);
+            if (enemyHealth <= 0) {
+                System.out.println("Congratulations! You have won!");
+            } else if (playerHealth <= 0) {
+                System.out.println("Your enemy has bested you.");
+            }
+            roundCounter++;
+        }
     }
 
     public enum Command {
