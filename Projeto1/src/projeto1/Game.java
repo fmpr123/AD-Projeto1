@@ -5,13 +5,7 @@
  */
 package projeto1;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.InputMismatchException;
-import java.util.Random;
-import java.util.Scanner;
-import java.util.concurrent.TimeUnit;
+import java.util.*;
 
 /**
  *
@@ -26,7 +20,6 @@ public class Game {
 
         int armySize = 100, enemyArmySize = 100;
         int cycleControl = 0;
-        int enemySum = 0;
         String slotsChoice = null;
         Scanner scanner = new Scanner(System.in);
         int catapultChoice = 0, infantryChoice = 0, cavalryChoice = 0, splitChoice = 0;
@@ -36,27 +29,19 @@ public class Game {
         while (enemyArmySize > 0 && cycleControl == 0) {
             enemyCatapultChoice = new Random().nextInt(101);
             enemyArmySize -= enemyCatapultChoice;
-            //System.out.println("catapultas: " + enemyCatapultChoice);
-            System.out.println(enemyArmySize);
 
             enemyInfantryChoice = new Random().nextInt(enemyArmySize);
             enemyArmySize -= enemyInfantryChoice;
-            //System.out.println("infantaria: " + enemyInfantryChoice);
-            System.out.println(enemyArmySize);
 
             enemyCavalryChoice = new Random().nextInt(enemyArmySize);
             enemyArmySize -= enemyCavalryChoice;
-            //System.out.println("cavalaria: " + enemyCavalryChoice);
-            System.out.println(enemyArmySize);
 
             enemySplitChoice = new Random().nextInt(101);
 
             enemy = new Army(enemyCatapultChoice, enemyInfantryChoice, enemyCavalryChoice, enemySplitChoice);
 
+            System.out.println("Enemy army has been created.");
             cycleControl = 1;
-            //enemySum = enemyCatapultChoice + enemyInfantryChoice + enemyCavalryChoice;
-            //System.out.println("soma exercito inimigo = " + enemySum);
-            //System.out.println("split exercito inimigo = " + enemySplitChoice);  
         }
 
         //PLAYER
