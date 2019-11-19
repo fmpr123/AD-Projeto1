@@ -7,9 +7,9 @@ package projeto1;
 
 /**
  *
- * @author Turma A
+ * @author Fabrício and Pedro Malho
  */
-public class Cavalry extends FightingForce{
+public class Cavalry extends FightingForce {
 
     public Cavalry() {
         super(50, 50, 0);
