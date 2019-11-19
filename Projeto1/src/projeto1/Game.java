@@ -185,21 +185,21 @@ public class Game {
 
     private void inspect() {
         if (!player.attackForce.isEmpty()) {
-
-            //PLAYER Inspect
-            System.out.println("Player Attack Force: ");
+            
+            //Player Inspect
             Collections.sort(player.attackForce);
-            System.out.println(player.attackForce.toString());
-
-            System.out.println("Player Defense Force: ");
             Collections.sort(player.defenseForce);
+            System.out.println("Player Attack Force: ");
+            System.out.println(player.attackForce.toString());;
+            System.out.println("Player Defense Force: ");
             System.out.println(player.defenseForce.toString());
 
             System.out.println(" ");
             
             //CPU Inspect
-            System.out.println("Enemy Attack Force: ");
             Collections.sort(enemy.attackForce);
+            Collections.sort(enemy.defenseForce);
+            System.out.println("Enemy Attack Force: ");
             System.out.println(enemy.attackForce.toString());
 
             System.out.println("Enemy Defense Force: ");
@@ -239,8 +239,7 @@ public class Game {
                 enemyHealth = Combat.defenseSizeOf(enemy.defenseForce);
 
                 if (enemyHealth <= 0) {
-
-                    System.out.println("Congratulations! You have won!");
+                    System.out.println("Congratulations! You won!");
                     System.out.println("Do you wish to play again? YES/NO");
 
                     line = scanner.next();
@@ -272,8 +271,7 @@ public class Game {
                     line = line.toUpperCase();
 
                     while (line.contentEquals("YES") == false && line.contentEquals("NO") == false) {
-                        
-                        System.out.println("Wrong choice, do you wish to play again? YES/NO");
+                        System.out.println("Invalid choice, do you wish to play again? YES/NO");
 
                         line = scanner.next();
                         line = line.replaceAll("[0-9]", "");
@@ -332,7 +330,7 @@ public class Game {
 
                 scanner.nextLine();
 
-                System.out.println("Wrong choice, do you want to Create, Inspect, Play or Exit");
+                System.out.println("Invalid choice, do you want to Create, Inspect, Play or Exit");
 
                 line = scanner.nextLine();
                 line = line.replaceAll("[0-9]", "");
