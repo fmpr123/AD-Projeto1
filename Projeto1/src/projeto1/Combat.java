@@ -30,7 +30,7 @@ public class Combat {
             total += army.get(i).getDefense();
         }
 
-        return total;
+        return total;           
     }
 
     public static int attackForceRound(ArrayList<FightingForce> army) {

@@ -287,7 +287,8 @@ public class Game {
                         System.exit(0);
                     }
                 }
-
+                
+                
                 System.out.println("Round " + roundCounter + " begins!");
                 System.out.println("You will be attacking with a force of " + playerRoundForce + " and your enemy has " + enemyHealth + " of defensive forces!");
                 Combat.attackStart(playerRoundForce, enemy.defenseForce);
