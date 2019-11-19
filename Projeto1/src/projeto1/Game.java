@@ -5,9 +5,7 @@
  */
 package projeto1;
 
-import java.util.Collections;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  *
@@ -42,6 +40,7 @@ public class Game {
 
             enemy = new Army(enemyCatapultChoice, enemyInfantryChoice, enemyCavalryChoice, enemySplitChoice);
 
+            System.out.println("Enemy army has been created.");
             cycleControl = 1;
         }
 
