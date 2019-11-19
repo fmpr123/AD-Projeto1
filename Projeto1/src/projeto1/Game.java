@@ -185,27 +185,19 @@ public class Game {
 
     private void inspect() {
         if (!player.attackForce.isEmpty()) {
-
-            System.out.println("Player Attack Force: ");
-            System.out.println(player.attackForce.toString());
+            
+            //Player Inspect
             Collections.sort(player.attackForce);
-            System.out.println("Player Attack Force Sorted: ");
-            System.out.println(player.attackForce.toString());
+            Collections.sort(player.defenseForce);
+            System.out.println("Player Attack Force: ");
+            System.out.println(player.attackForce.toString());;
             System.out.println("Player Defense Force: ");
             System.out.println(player.defenseForce.toString());
-            System.out.println("START: " + player.attackForce + " : END");
-            Collections.sort(player.defenseForce);
-            System.out.println("Army before test: " + Combat.defenseSizeOf(player.defenseForce) + " : END");
-            System.out.println("Army after test: " + Combat.defenseSizeOf(player.defenseForce) + " : END");
-
-            player.attackForce.get(0).setLuck(1);
-            System.out.println("Luck after: " + player.attackForce.get(0).getLuck() + " : END");
 
             //CPU Inspect
-            System.out.println("Enemy Attack Force: ");
-            System.out.println(enemy.attackForce.toString());
             Collections.sort(enemy.attackForce);
-            System.out.println("Enemy Attack Force Sorted: ");
+            Collections.sort(enemy.defenseForce);
+            System.out.println("Enemy Attack Force: ");
             System.out.println(enemy.attackForce.toString());
             System.out.println("Enemy Defense Force: ");
             System.out.println(enemy.defenseForce.toString());
@@ -240,7 +232,7 @@ public class Game {
                 enemyHealth = Combat.defenseSizeOf(enemy.defenseForce);
 
                 if (enemyHealth <= 0) {
-                    System.out.println("Congratulations! You have won!");
+                    System.out.println("Congratulations! You won!");
                     System.out.println("Do you wish to play again? YES/NO");
 
                     line = scanner.next();
@@ -248,7 +240,7 @@ public class Game {
                     line = line.toUpperCase();
 
                     while (line.contentEquals("YES") == false && line.contentEquals("NO") == false) {
-                        System.out.println("Wrong choice, do you wish to play again? YES/NO");
+                        System.out.println("Invalid choice, do you wish to play again? YES/NO");
 
                         line = scanner.next();
                         line = line.replaceAll("[0-9]", "");
@@ -270,7 +262,7 @@ public class Game {
                     line = line.toUpperCase();
 
                     while (line.contentEquals("YES") == false && line.contentEquals("NO") == false) {
-                        System.out.println("Wrong choice, do you wish to play again? YES/NO");
+                        System.out.println("Invalid choice, do you wish to play again? YES/NO");
 
                         line = scanner.next();
                         line = line.replaceAll("[0-9]", "");
@@ -328,7 +320,7 @@ public class Game {
 
                 scanner.nextLine();
 
-                System.out.println("Wrong choice, do you want to Create, Inspect, Play or Exit");
+                System.out.println("Invalid choice, do you want to Create, Inspect, Play or Exit");
 
                 line = scanner.nextLine();
                 line = line.replaceAll("[0-9]", "");
