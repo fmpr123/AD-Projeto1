@@ -154,21 +154,8 @@ public class Game {
             }
         }
 
-        System.out.println("How do you want to split your army: (1~100(%))");
-        while (true) {
-            try {
-                splitChoice = scanner.nextInt();
-                break;
-            } catch (Exception e) {
-                scanner.nextLine();
-                System.out.println("Wrong input, please insert a number: ");
-                continue;
-            }
-        }
-
-        while (splitChoice < 1 || splitChoice > 100) {
-            System.out.println("Wrong ammount, please insert a number between 1 and 100: ");
-
+        if (catapultChoice != 0 || infantryChoice != 0 || cavalryChoice != 0) {
+            System.out.println("How do you want to split your army: (1~100(%))");
             while (true) {
                 try {
                     splitChoice = scanner.nextInt();
@@ -179,13 +166,29 @@ public class Game {
                     continue;
                 }
             }
+
+            while (splitChoice < 1 || splitChoice > 100) {
+                System.out.println("Wrong ammount, please insert a number between 1 and 100: ");
+
+                while (true) {
+                    try {
+                        splitChoice = scanner.nextInt();
+                        break;
+                    } catch (Exception e) {
+                        scanner.nextLine();
+                        System.out.println("Wrong input, please insert a number: ");
+                        continue;
+                    }
+                }
+            }
         }
+
         player = new Army(catapultChoice, infantryChoice, cavalryChoice, splitChoice);
     }
 
     private void inspect() {
-        if (!player.attackForce.isEmpty()) {
-            
+        if (player.attackForce.isEmpty() == false || player.defenseForce.isEmpty() == false) {
+
             //Player Inspect
             Collections.sort(player.attackForce);
             Collections.sort(player.defenseForce);
@@ -195,7 +198,7 @@ public class Game {
             System.out.println(player.defenseForce.toString());
 
             System.out.println(" ");
-            
+
             //CPU Inspect
             Collections.sort(enemy.attackForce);
             Collections.sort(enemy.defenseForce);
@@ -210,16 +213,16 @@ public class Game {
             System.out.println("You don't have units in your army, please create a new one.");
         }
     }
-    
+
     private void play() {
-        if (player.attackForce.isEmpty()==false || player.defenseForce.isEmpty()==false) {
+        if (player.attackForce.isEmpty() == false || player.defenseForce.isEmpty() == false) {
 
             Scanner scanner = new Scanner(System.in);
             String line = null;
-            
+
             Collections.sort(player.defenseForce);
             Collections.sort(enemy.defenseForce);
-            
+
             int playerAttack = Combat.attackSizeOf(player.attackForce);
             int playerHealth = Combat.defenseSizeOf(player.defenseForce);
             int enemyAttack = Combat.attackSizeOf(enemy.attackForce);
@@ -230,7 +233,7 @@ public class Game {
             System.out.println("You have a theoretical attack force of " + playerAttack + ", and a defensive force of " + playerHealth);
             System.out.println("You will be fighting an enemy that has a theoretical attack force of " + enemyAttack + ", and a defensive force of " + enemyHealth);
             System.out.println(" ");
-            
+
             while (playerHealth > 0 && enemyHealth > 0) {
 
                 int playerRoundForce = Combat.attackForceRound(player.attackForce);
@@ -247,7 +250,7 @@ public class Game {
                     line = line.toUpperCase();
 
                     while (line.contentEquals("YES") == false && line.contentEquals("NO") == false) {
-                        
+
                         System.out.println("Invalid choice, do you wish to play again? YES/NO");
 
                         line = scanner.next();
@@ -262,7 +265,7 @@ public class Game {
                     }
 
                 } else if (playerHealth <= 0) {
-                    
+
                     System.out.println("Your enemy has bested you.");
                     System.out.println("Do you wish to play again? YES/NO");
 
@@ -299,7 +302,7 @@ public class Game {
             player.defenseForce.clear();
             enemy.attackForce.clear();
             enemy.defenseForce.clear();
-            
+
         } else {
             System.out.println("You don't have units in your army, please create a new one.");
         }
