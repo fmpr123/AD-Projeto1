@@ -9,22 +9,23 @@ import java.util.Objects;
 
 /**
  *
- * @author Turma A
+ * @author Fabrício and Pedro Malho
  */
-public class FightingForce implements Comparable<FightingForce>{
-   private int attack;
-   private int defense;
-   private int luck;
+public class FightingForce implements Comparable<FightingForce> {
+
+    private int attack;
+    private int defense;
+    private int luck;
 
     public FightingForce() {
     }
-    
+
     public FightingForce(int attack, int defense, int luck) {
         this.attack = attack;
         this.defense = defense;
         this.luck = luck;
     }
-    
+
     public void setAttack(int attack) {
         this.attack = attack;
     }
@@ -32,7 +33,7 @@ public class FightingForce implements Comparable<FightingForce>{
     public void setDefense(int defense) {
         this.defense = defense;
     }
-    
+
     public void setLuck(int luck) {
         this.luck = luck;
     }
@@ -40,7 +41,7 @@ public class FightingForce implements Comparable<FightingForce>{
     public int getAttack() {
         return attack;
     }
-    
+
     public int getDefense() {
         return defense;
     }
@@ -57,9 +58,9 @@ public class FightingForce implements Comparable<FightingForce>{
         if (obj == null || getClass() != obj.getClass()) {
             return false;
         }
-        
+
         final FightingForce other = (FightingForce) obj;
-        
+
         return attack == other.attack && defense == other.defense;
     }
 
@@ -77,6 +78,5 @@ public class FightingForce implements Comparable<FightingForce>{
     public String toString() {
         return "Attack: " + this.attack + " | Defense: " + this.defense;
     }
-    
-    
+
 }

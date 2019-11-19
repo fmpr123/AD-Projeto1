@@ -10,9 +10,10 @@ import java.util.Random;
 
 /**
  *
- * @author Turma A
+ * @author Fabrício and Pedro Malho
  */
 public class Army {
+
     ArrayList<FightingForce> attackForce;
     ArrayList<FightingForce> defenseForce;
 

@@ -7,14 +7,14 @@ package projeto1;
 
 /**
  *
- * @author Turma A
+ * @author Fabrício and Pedro Malho
  */
 public class Catapult extends FightingForce {
 
     public Catapult() {
         super(100, 1, 0);
     }
-    
+
     @Override
     public String toString() {
         return "Catapult - " + super.toString();

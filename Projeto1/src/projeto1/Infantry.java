@@ -7,9 +7,9 @@ package projeto1;
 
 /**
  *
- * @author Turma A
+ * @author Fabrício and Pedro Malho
  */
-public class Infantry extends FightingForce{
+public class Infantry extends FightingForce {
 
     public Infantry() {
         super(25, 75, 0);
@@ -19,5 +19,5 @@ public class Infantry extends FightingForce{
     public String toString() {
         return "Infantry - " + super.toString();
     }
-    
+
 }
