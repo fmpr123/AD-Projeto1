@@ -196,7 +196,7 @@ public class Game {
             System.out.println(player.defenseForce.toString());
 
             System.out.println(" ");
-
+            
             //CPU Inspect
             System.out.println("Enemy Attack Force: ");
             Collections.sort(enemy.attackForce);
@@ -207,7 +207,7 @@ public class Game {
             System.out.println(enemy.defenseForce.toString());
 
         } else {
-            System.out.println("You have just finished a fight, please create a new army.");
+            System.out.println("You don't have units in your army, please create a new one.");
         }
     }
     
@@ -219,7 +219,7 @@ public class Game {
             
             Collections.sort(player.defenseForce);
             Collections.sort(enemy.defenseForce);
-
+            
             int playerAttack = Combat.attackSizeOf(player.attackForce);
             int playerHealth = Combat.defenseSizeOf(player.defenseForce);
             int enemyAttack = Combat.attackSizeOf(enemy.attackForce);
@@ -230,7 +230,7 @@ public class Game {
             System.out.println("You have a theoretical attack force of " + playerAttack + ", and a defensive force of " + playerHealth);
             System.out.println("You will be fighting an enemy that has a theoretical attack force of " + enemyAttack + ", and a defensive force of " + enemyHealth);
             System.out.println(" ");
-
+            
             while (playerHealth > 0 && enemyHealth > 0) {
 
                 int playerRoundForce = Combat.attackForceRound(player.attackForce);
@@ -303,7 +303,7 @@ public class Game {
             enemy.defenseForce.clear();
             
         } else {
-            System.out.println("You don't units in your army, please create a new one.");
+            System.out.println("You don't have units in your army, please create a new one.");
         }
     }
 

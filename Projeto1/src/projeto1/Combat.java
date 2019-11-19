@@ -13,21 +13,21 @@ import java.util.*;
  */
 public class Combat {
 
-    public static int defenseSizeOf(ArrayList<FightingForce> army) {
+    public static int attackSizeOf(ArrayList<FightingForce> army) {
         int total = 0;
-
+        
         for (int i = 0; i < army.size(); i++) {
-            total += army.get(i).getDefense();
+            total += army.get(i).getAttack();
         }
 
         return total;
     }
 
-    public static int attackSizeOf(ArrayList<FightingForce> army) {
+    public static int defenseSizeOf(ArrayList<FightingForce> army) {
         int total = 0;
 
         for (int i = 0; i < army.size(); i++) {
-            total += army.get(i).getAttack();
+            total += army.get(i).getDefense();
         }
 
         return total;
