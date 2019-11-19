@@ -24,7 +24,7 @@ public class Game {
         Scanner scanner = new Scanner(System.in);
         int catapultChoice = 0, infantryChoice = 0, cavalryChoice = 0, splitChoice = 0;
         int enemyCatapultChoice = 0, enemyInfantryChoice = 0, enemyCavalryChoice = 0, enemySplitChoice = 0;
-        
+
         //CPU Army
         while (enemyArmySize > 0 && cycleControl == 0) {
             enemyCatapultChoice = new Random().nextInt(101);
@@ -138,7 +138,7 @@ public class Game {
                 }
                 armySize -= cavalryChoice;
             }
-            
+
             if (armySize > 0) {
                 System.out.println("You still have " + armySize + " slots available. Do you wish to USE or LEAVE them?");
                 slotsChoice = scanner.next();
@@ -155,7 +155,7 @@ public class Game {
         }
 
         if (catapultChoice != 0 || infantryChoice != 0 || cavalryChoice != 0) {
-            System.out.println("How do you want to split your army: (1~100(%))");
+            System.out.println("How do you want to split your army: (0~100(%))");
             while (true) {
                 try {
                     splitChoice = scanner.nextInt();
@@ -167,8 +167,8 @@ public class Game {
                 }
             }
 
-            while (splitChoice < 1 || splitChoice > 100) {
-                System.out.println("Wrong ammount, please insert a number between 1 and 100: ");
+            while (splitChoice < 0 || splitChoice > 100) {
+                System.out.println("Wrong ammount, please insert a number between 0 and 100: ");
 
                 while (true) {
                     try {
@@ -233,8 +233,8 @@ public class Game {
             System.out.println("You have a theoretical attack force of " + playerAttack + ", and a defensive force of " + playerHealth);
             System.out.println("You will be fighting an enemy that has a theoretical attack force of " + enemyAttack + ", and a defensive force of " + enemyHealth);
             System.out.println(" ");
-
-            while (playerHealth > 0 && enemyHealth > 0) {
+            
+            while (playerHealth >= 0 && enemyHealth >= 0) {
 
                 int playerRoundForce = Combat.attackForceRound(player.attackForce);
                 int enemyRoundForce = Combat.attackForceRound(enemy.attackForce);
@@ -328,16 +328,18 @@ public class Game {
             line = line.replaceAll("[0-9]", "");
             line = line.toUpperCase();
 
-            while (line.contentEquals("CREATE") == false && line.contentEquals("INSPECT") == false
+            if (line.contentEquals("CREATE") == false && line.contentEquals("INSPECT") == false
                     && line.contentEquals("PLAY") == false && line.contentEquals("EXIT") == false) {
-
                 scanner.nextLine();
+                while (line.contentEquals("CREATE") == false && line.contentEquals("INSPECT") == false
+                        && line.contentEquals("PLAY") == false && line.contentEquals("EXIT") == false) {
+                    
+                    System.out.println("Invalid choice, do you want to Create, Inspect, Play or Exit");
 
-                System.out.println("Invalid choice, do you want to Create, Inspect, Play or Exit");
-
-                line = scanner.nextLine();
-                line = line.replaceAll("[0-9]", "");
-                line = line.toUpperCase();
+                    line = scanner.nextLine();
+                    line = line.replaceAll("[0-9]", "");
+                    line = line.toUpperCase();
+                }
             }
 
             if (line.contentEquals("INSPECT") == true && verification == false

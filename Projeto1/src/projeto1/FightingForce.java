@@ -29,7 +29,7 @@ public class FightingForce implements Comparable<FightingForce> {
     public void setAttack(int attack) {
         this.attack = attack;
     }
-
+    
     public void setDefense(int defense) {
         this.defense = defense;
     }
@@ -49,7 +49,7 @@ public class FightingForce implements Comparable<FightingForce> {
     public int getLuck() {
         return luck;
     }
-
+    
     @Override
     public boolean equals(final Object obj) {
         if (this == obj) {

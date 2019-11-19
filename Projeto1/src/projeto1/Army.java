@@ -22,21 +22,21 @@ public class Army {
         defenseForce = new ArrayList<>();
 
         for (int i = 0; i < catapult; i++) {
-            if (new Random().nextInt(101) < side) {
+            if (new Random().nextInt(100) < side) {
                 attackForce.add(new Catapult());
             } else {
                 defenseForce.add(new Catapult());
             }
         }
         for (int i = 0; i < infantry; i++) {
-            if (new Random().nextInt(101) < side) {
+            if (new Random().nextInt(100) < side) {
                 attackForce.add(new Infantry());
             } else {
                 defenseForce.add(new Infantry());
             }
         }
         for (int i = 0; i < cavalry; i++) {
-            if (new Random().nextInt(101) < side) {
+            if (new Random().nextInt(100) < side) {
                 attackForce.add(new Cavalry());
             } else {
                 defenseForce.add(new Cavalry());
