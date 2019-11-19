@@ -24,7 +24,7 @@ public class Game {
         Scanner scanner = new Scanner(System.in);
         int catapultChoice = 0, infantryChoice = 0, cavalryChoice = 0, splitChoice = 0;
         int enemyCatapultChoice = 0, enemyInfantryChoice = 0, enemyCavalryChoice = 0, enemySplitChoice = 0;
-
+        
         //CPU Army
         while (enemyArmySize > 0 && cycleControl == 0) {
             enemyCatapultChoice = new Random().nextInt(101);
@@ -138,7 +138,7 @@ public class Game {
                 }
                 armySize -= cavalryChoice;
             }
-
+            
             if (armySize > 0) {
                 System.out.println("You still have " + armySize + " slots available. Do you wish to USE or LEAVE them?");
                 slotsChoice = scanner.next();
