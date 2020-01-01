@@ -13,6 +13,8 @@ import com.mycompany.events.EventCallback;
 
 import java.io.*;
 import java.net.URISyntaxException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Random;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ExecutorService;
@@ -34,7 +36,7 @@ public class Device extends javax.swing.JFrame {
      */
     public Device() throws URISyntaxException {
         initComponents();
-        
+
         client = new DeviceClient(connString, protocol);
         try {
             client.open();
@@ -42,7 +44,7 @@ public class Device extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(Device.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         simulateDevice();
     }
 
@@ -114,24 +116,23 @@ public class Device extends javax.swing.JFrame {
         try {
             // Initialize the simulated telemetry.
             double minTemperature = 20;
-            double minHumidity = 60;
             Random rand = new Random();
 
             while (true) {
-                // Simulate telemetry.
+                Date date = new Date();
+                SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+
                 double currentTemperature = minTemperature + rand.nextDouble() * 15;
-                double currentHumidity = minHumidity + rand.nextDouble() * 20;
+
                 TelemetryDataPoint telemetryDataPoint = new TelemetryDataPoint();
-                /*telemetryDataPoint.temperature = currentTemperature;
-                telemetryDataPoint.humidity = currentHumidity;*/
-                
-                telemetryDataPoint.distance=10;
-                telemetryDataPoint.dataAtual="17/12/2019";
+
+                telemetryDataPoint.distance = 10; //Mudar para a distancia que o devite tem atual
+                telemetryDataPoint.dataAtual = formatter.format(date);
 
                 // Add the telemetry to the message body as JSON.
                 String msgStr = telemetryDataPoint.serialize();
                 Message msg = new Message(msgStr);
-
+                
                 // Add a custom application property to the message.
                 // An IoT hub can filter on these properties without access to the message body.
                 msg.setProperty("temperatureAlert", (currentTemperature > 30) ? "true" : "false");

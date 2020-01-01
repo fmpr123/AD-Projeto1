@@ -26,7 +26,7 @@ public class RemoteController extends javax.swing.JFrame {
     public static final String deviceId = "MyJavaDevice";
 
     // Name of direct method and payload.
-    public static final String methodName = "SetTelemetryInterval";
+    public static final String methodName = "setDeviceDistance";
 
     public static final Long responseTimeout = TimeUnit.SECONDS.toSeconds(30);
     public static final Long connectTimeout = TimeUnit.SECONDS.toSeconds(5);
