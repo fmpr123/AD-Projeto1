@@ -58,7 +58,7 @@ public class RemoteController extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jButtonActivateAlarm = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        jTextAreaLog = new javax.swing.JTextArea();
 
         jLabel2.setText("jLabel2");
 
@@ -147,9 +147,9 @@ public class RemoteController extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        jTextAreaLog.setColumns(20);
+        jTextAreaLog.setRows(5);
+        jScrollPane1.setViewportView(jTextAreaLog);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -180,6 +180,10 @@ public class RemoteController extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void Log(String event) {
+        jTextAreaLog.setText(jTextAreaLog.getText() + event + "\n");
+    }
+    
     private void jButtonChangeDistanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonChangeDistanceActionPerformed
         int payload=0;
         try {
@@ -209,6 +213,7 @@ public class RemoteController extends javax.swing.JFrame {
         }
         System.out.println("Done!");
         System.out.println("Changed max distance to: "+payload+"!");
+        Log("Changed max distance to: "+payload);
     }//GEN-LAST:event_jButtonChangeDistanceActionPerformed
 
     private void jButtonActivateAlarmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActivateAlarmActionPerformed
@@ -219,13 +224,14 @@ public class RemoteController extends javax.swing.JFrame {
             // Create a DeviceMethod instance to call a direct method.
             DeviceMethod methodClient = DeviceMethod.createFromConnectionString(iotHubConnectionString);
             
-            
             if(jButtonActivateAlarm.getText().equals("Ativar")){
                 payload = "true";
                 jButtonActivateAlarm.setText("Desativar");
+                Log("Alarm activated");
             }else{
                 payload = "false";
                 jButtonActivateAlarm.setText("Ativar");
+                Log("Alarm deactivated");
             }
 
             // Call the direct method.
@@ -296,7 +302,7 @@ public class RemoteController extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSlider jSliderSetDistance;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextArea jTextAreaLog;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }
