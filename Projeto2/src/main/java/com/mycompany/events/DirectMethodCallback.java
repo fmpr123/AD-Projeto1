@@ -19,11 +19,17 @@ public class DirectMethodCallback implements DeviceMethodCallback {
     private static final int METHOD_NOT_DEFINED = 404;
     private static final int INVALID_PARAMETER = 400;
 
-    private static int deviceDistance = 1000;
+    public int deviceDistance = 10;
+    public String deviceAlarm="";
 
     private void setDeviceDistance(int distance) {
         System.out.println("Direct method # Setting device distance: " + distance);
-        deviceDistance = distance * 1000;
+        deviceDistance = distance;
+    }
+    
+    private void setDeviceAlarm(String alarm) {
+        System.out.println("Direct method # Setting device alarm status to: " + alarm);
+        deviceAlarm = alarm;
     }
 
     @Override
@@ -38,6 +44,20 @@ public class DirectMethodCallback implements DeviceMethodCallback {
                     interval = Integer.parseInt(payload);
                     System.out.println(payload);
                     setDeviceDistance(interval);
+                    deviceMethodData = new DeviceMethodData(status, "Executed direct method " + methodName);
+                } catch (NumberFormatException e) {
+                    int status = INVALID_PARAMETER;
+                    deviceMethodData = new DeviceMethodData(status, "Invalid parameter " + payload);
+                }
+                break;
+            }
+            case "setDeviceAlarm": {
+                String interval;
+                try {
+                    int status = METHOD_SUCCESS;
+                    interval = payload;
+                    System.out.println(payload);
+                    setDeviceAlarm(interval);
                     deviceMethodData = new DeviceMethodData(status, "Executed direct method " + methodName);
                 } catch (NumberFormatException e) {
                     int status = INVALID_PARAMETER;

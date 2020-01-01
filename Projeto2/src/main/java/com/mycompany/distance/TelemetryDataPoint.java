@@ -14,8 +14,9 @@ import com.google.gson.Gson;
 public class TelemetryDataPoint {
     
     public double distance;
-    public String dataAtual;
-    public int payload;
+    public String currentDate;
+    public boolean alertStatus;
+    //public int payload;
     
     // Serialize object to JSON format.
     public String serialize() {

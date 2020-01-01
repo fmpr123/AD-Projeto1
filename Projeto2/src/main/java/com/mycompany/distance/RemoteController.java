@@ -26,7 +26,8 @@ public class RemoteController extends javax.swing.JFrame {
     public static final String deviceId = "MyJavaDevice";
 
     // Name of direct method and payload.
-    public static final String methodName = "setDeviceDistance";
+    public static final String methodDistance = "setDeviceDistance";
+    public static final String methodAlarm = "setDeviceAlarm";
 
     public static final Long responseTimeout = TimeUnit.SECONDS.toSeconds(30);
     public static final Long connectTimeout = TimeUnit.SECONDS.toSeconds(5);
@@ -117,6 +118,11 @@ public class RemoteController extends javax.swing.JFrame {
         jLabel4.setText("Alarme");
 
         jButtonActivateAlarm.setText("Ativar");
+        jButtonActivateAlarm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonActivateAlarmActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -185,7 +191,7 @@ public class RemoteController extends javax.swing.JFrame {
             payload = jSliderSetDistance.getValue();
 
             // Call the direct method.
-            MethodResult result = methodClient.invoke(deviceId, methodName, responseTimeout, connectTimeout, payload);
+            MethodResult result = methodClient.invoke(deviceId, methodDistance, responseTimeout, connectTimeout, payload);
 
             if (result == null) {
                 throw new IOException("Direct method invoke returns null");
@@ -204,6 +210,44 @@ public class RemoteController extends javax.swing.JFrame {
         System.out.println("Done!");
         System.out.println("Changed max distance to: "+payload+"!");
     }//GEN-LAST:event_jButtonChangeDistanceActionPerformed
+
+    private void jButtonActivateAlarmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActivateAlarmActionPerformed
+        String payload="";
+        try {
+            System.out.println("Calling direct method...");
+
+            // Create a DeviceMethod instance to call a direct method.
+            DeviceMethod methodClient = DeviceMethod.createFromConnectionString(iotHubConnectionString);
+            
+            
+            if(jButtonActivateAlarm.getText().equals("Ativar")){
+                payload = "true";
+                jButtonActivateAlarm.setText("Desativar");
+            }else{
+                payload = "false";
+                jButtonActivateAlarm.setText("Ativar");
+            }
+
+            // Call the direct method.
+            MethodResult result = methodClient.invoke(deviceId, methodAlarm, responseTimeout, connectTimeout, payload);
+
+            if (result == null) {
+                throw new IOException("Direct method invoke returns null");
+            }
+            
+            // Show the acknowledgement from the device.
+            System.out.println("Status: " + result.getStatus());
+            System.out.println("Response: " + result.getPayload());
+        } catch (IotHubException e) {
+            System.out.println("IotHubException calling direct method:");
+            System.out.println(e.getMessage());
+        } catch (IOException e) {
+            System.out.println("IOException calling direct method:");
+            System.out.println(e.getMessage());
+        }
+        System.out.println("Done!");
+        System.out.println("Changed alarm to: "+payload+"!");
+    }//GEN-LAST:event_jButtonActivateAlarmActionPerformed
 
     /**
      * @param args the command line arguments

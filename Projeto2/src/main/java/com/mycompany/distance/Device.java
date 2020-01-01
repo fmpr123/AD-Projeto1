@@ -115,19 +115,20 @@ public class Device extends javax.swing.JFrame {
     private void simulateDevice() {
         try {
             // Initialize the simulated telemetry.
-            double minTemperature = 20;
-            Random rand = new Random();
+            //double minTemperature = 20;
+            //Random rand = new Random();
 
             while (true) {
                 Date date = new Date();
-                SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+                SimpleDateFormat formatter = new SimpleDateFormat("EEE MMM dd HH:mm:ss yyyy");
 
-                double currentTemperature = minTemperature + rand.nextDouble() * 15;
-
+                //double currentTemperature = minTemperature + rand.nextDouble() * 15;
+                
                 TelemetryDataPoint telemetryDataPoint = new TelemetryDataPoint();
-
-                telemetryDataPoint.distance = 10; //Mudar para a distancia que o devite tem atual
-                telemetryDataPoint.dataAtual = formatter.format(date);
+                
+                telemetryDataPoint.distance = 10; //Mudar para a distancia que o device tem atualmente
+                telemetryDataPoint.currentDate = formatter.format(date);
+                telemetryDataPoint.alertStatus=false;
 
                 // Add the telemetry to the message body as JSON.
                 String msgStr = telemetryDataPoint.serialize();
@@ -135,7 +136,7 @@ public class Device extends javax.swing.JFrame {
                 
                 // Add a custom application property to the message.
                 // An IoT hub can filter on these properties without access to the message body.
-                msg.setProperty("temperatureAlert", (currentTemperature > 30) ? "true" : "false");
+                //msg.setProperty("temperatureAlert", (currentTemperature > 30) ? "true" : "false");
 
                 System.out.println("Sending message: " + msgStr);
 
